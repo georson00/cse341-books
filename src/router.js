@@ -5,26 +5,7 @@ import { getBooksHandler, getBookByIdHandler } from './controller/books.js';
 const router = express.Router();
 
 
-/**
- * @openapi
- * /books:
- *   get:
- *     summary: Get all books
- *     tags: [Books]
- *     responses:
- *       '200':
- *         description: A list of books. Returns an empty array if no books exist.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Book'
- *       '500':
- *         description: An internal server or database error occurred.
- */
-// Define the route for getting all books
-router.get('/books', getBooksHandler);
+
 
 
 /**
