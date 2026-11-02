@@ -29,6 +29,36 @@ router.get('/books', getBooksHandler);
 
 /**
  * @openapi
+ * /books:
+ *   get:
+ *     summary: Get all books
+ *     tags: [Books]
+ *     responses:
+ *       '200':
+ *         description: A list of books, or an empty array if none exist.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                   author:
+ *                     type: string
+ *                   title:
+ *                     type: string
+ *                   publicationDate:
+ *                     type: string
+ *       '500':
+ *         description: An internal server or database error occurred.
+ */
+// Define the route for getting all books
+router.get('/books', getBooksHandler);
+
+/**
+ * @openapi
  * /books/{id}:
  *   get:
  *     summary: Get a book by ID
@@ -47,7 +77,16 @@ router.get('/books', getBooksHandler);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Book'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 author:
+ *                   type: string
+ *                 title:
+ *                   type: string
+ *                 publicationDate:
+ *                   type: string
  *       '404':
  *         description: No book with the specified ID was found.
  *       '500':
