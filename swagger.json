@@ -20,13 +20,28 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of books. Returns an empty array if no books exist.",
+            "description": "A list of books, or an empty array if none exist.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Book"
+                    "$ref": "#/components/schemas/Book",
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "author": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "publicationDate": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -62,7 +77,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Book"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "publicationDate": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
