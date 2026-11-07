@@ -50,6 +50,58 @@
             "description": "An internal server or database error occurred."
           }
         }
+      },
+      "post": {
+        "summary": "Create a book",
+        "tags": [
+          "Books"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "authorId",
+                  "title",
+                  "publicationDate"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "b1"
+                  },
+                  "authorId": {
+                    "type": "string",
+                    "example": "a1"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Example Book"
+                  },
+                  "publicationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2023-01-01"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Book created successfully"
+          },
+          "400": {
+            "description": "Invalid request data or the specified authorId does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
       }
     },
     "/books/{id}": {
@@ -94,6 +146,105 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "No book with the specified ID was found."
+          },
+          "500": {
+            "description": "An internal server or database error occurred."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an existing book",
+        "description": "Updates a book using its custom ID. The book ID cannot be changed.",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The custom ID of the book to update.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "b1"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "authorId",
+                  "title",
+                  "publicationDate"
+                ],
+                "properties": {
+                  "authorId": {
+                    "type": "string",
+                    "example": "a1"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Updated Book Title"
+                  },
+                  "publicationDate": {
+                    "type": "string",
+                    "example": "2026-02-20"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or invalid fields, invalid authorId, or an attempt to change the book ID."
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a book by ID",
+        "description": "Deletes a book using its custom string ID.",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The custom ID of the book to delete.",
+            "schema": {
+              "type": "string",
+              "example": "b1"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Book deleted successfully. No content is returned."
           },
           "404": {
             "description": "No book with the specified ID was found."
